@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let product of products | async" (click)="product.expanded = !product.expanded">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="product.image"></ion-img>
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        {{ product.title }}<br>
+        <b>{{ product.price | currency:'USD' }}</b>
+        <p>{{ product.stock }} left</p>
+        <div [hidden]="!product.expanded">
+          {{ product.description }}
+        </div>
+      </ion-label>
+
+      <ion-row slot="end" class="ion-no-padding ion-align-items-center">
+        <ion-col size="5">
+          <ion-button (click)="addToCart($event, product)" fill="clear">
+            <ion-icon name="add" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="2">
+          {{ cart[product.id] || 0 }}
+        </ion-col>
+
+        <ion-col size="5">
+          <ion-button (click)="removeFromCart($event, product)" fill="clear" [disabled]="!cart[product.id] || cart[product.id] == 0">
+            <ion-icon name="remove" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openCart()" color="secondary" #myfab>
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

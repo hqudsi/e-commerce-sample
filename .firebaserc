@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "e-commerce-template-ea3ed": {
+      "hosting": {
+        "app": [
+          "e-commerce-template-ea3ed"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "e-commerce-template-ea3ed"
+  }
+}
